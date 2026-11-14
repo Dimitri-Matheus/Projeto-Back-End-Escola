@@ -65,6 +65,11 @@ Com a aplicação em execução, a documentação interativa da API fica dispon�
 http://localhost:8080/swagger-ui/index.html
 ```
 
+## Mapeamento do Banco de Dados
+<img width="4947" height="3976" alt="Diagram 2" src="https://github.com/user-attachments/assets/0fa6ae5e-6368-40ed-be40-0af05a52784a" />
+
+[Visualização Online](https://app.chartdb.io/diagram/bed05aaed1704c5e88310f)
+
 ## Licença
 
 Distribuído sob a licença MIT.
