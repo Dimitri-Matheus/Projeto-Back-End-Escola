@@ -1,5 +1,7 @@
 package br.com.escola.escola_api.service;
 
+import br.com.escola.escola_api.dto.SalaRequestDTO;
+import br.com.escola.escola_api.dto.SalaResponseDTO;
 import br.com.escola.escola_api.model.Sala;
 import br.com.escola.escola_api.repository.SalaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,34 +17,44 @@ public class SalaService {
     @Autowired
     private SalaRepository salaRepository;
 
-    public Sala cadastrarSala(Sala sala) {
-        if (salaRepository.existsByRoomCode(sala.getRoomCode())) {
+    public SalaResponseDTO cadastrarSala(SalaRequestDTO dto) {
+        if (salaRepository.existsByRoomCode(dto.roomCode())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Identificação de sala já cadastrada!");
         }
-        sala.setId(null);
-        return salaRepository.save(sala);
+        Sala sala = new Sala();
+        sala.setRoomCode(dto.roomCode());
+        sala.setBlock(dto.block());
+        sala.setRoomType(dto.roomType());
+        sala.setCapacity(dto.capacity());
+        Sala salaSalva = salaRepository.save(sala);
+        return new SalaResponseDTO(salaSalva);
     }
 
-    public List<Sala> listarTodos() {
-        return salaRepository.findAll();
+    public List<SalaResponseDTO> listarTodos() {
+        return salaRepository.findAll()
+                .stream()
+                .map(SalaResponseDTO::new)
+                .toList();
     }
 
-    public Sala buscarPorId(Long id) {
-        return salaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sala não encontrada com o ID: " + id));
-    }
-
-    public Sala atualizarSala(Long id, Sala salaRecebida) {
+    public SalaResponseDTO buscarPorId(Long id) {
         Sala sala = salaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sala não encontrada com o ID: " + id));
-        if (salaRepository.existsByRoomCodeAndIdNot(salaRecebida.getRoomCode(), id)) {
+        return new SalaResponseDTO(sala);
+    }
+
+    public SalaResponseDTO atualizarSala(Long id, SalaRequestDTO dto) {
+        Sala sala = salaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sala não encontrada com o ID: " + id));
+        if (salaRepository.existsByRoomCodeAndIdNot(dto.roomCode(), id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Identificação de sala já cadastrada!");
         }
-        sala.setRoomCode(salaRecebida.getRoomCode());
-        sala.setBlock(salaRecebida.getBlock());
-        sala.setRoomType(salaRecebida.getRoomType());
-        sala.setCapacity(salaRecebida.getCapacity());
-        return salaRepository.save(sala);
+        sala.setRoomCode(dto.roomCode());
+        sala.setBlock(dto.block());
+        sala.setRoomType(dto.roomType());
+        sala.setCapacity(dto.capacity());
+        Sala salaAtualizada = salaRepository.save(sala);
+        return new SalaResponseDTO(salaAtualizada);
     }
 
     public void deletarSala(Long id) {
