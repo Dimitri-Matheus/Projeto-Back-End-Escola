@@ -1,10 +1,10 @@
-package br.com.escola.escola_api.dto;
+package br.com.escola.escola_api.record;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public record SalaRequestDTO(
+public record SalaRequest(
         @NotBlank(message = "A identificação da sala é obrigatória")
         String roomCode,
 

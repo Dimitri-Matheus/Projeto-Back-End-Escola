@@ -1,15 +1,15 @@
-package br.com.escola.escola_api.dto;
+package br.com.escola.escola_api.record;
 
 import br.com.escola.escola_api.model.Sala;
 
-public record SalaResponseDTO(
+public record SalaResponse(
         Long id,
         String roomCode,
         String block,
         String roomType,
         Integer capacity
 ) {
-    public SalaResponseDTO(Sala sala) {
+    public SalaResponse(Sala sala) {
         this(
                 sala.getId(),
                 sala.getRoomCode(),
