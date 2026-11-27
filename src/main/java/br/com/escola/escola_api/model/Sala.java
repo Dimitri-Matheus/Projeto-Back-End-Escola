@@ -1,5 +1,4 @@
 package br.com.escola.escola_api.model;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,6 @@ import lombok.*;
 public class Sala {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "A identificação da sala é obrigatória")

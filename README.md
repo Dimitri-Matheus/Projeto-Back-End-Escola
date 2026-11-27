@@ -57,28 +57,6 @@ Ambos os recursos seguem o padrão REST:
 | `PUT` | `/matriculas/{id}` | `/salas/{id}` | Atualiza um registro existente |
 | `DELETE` | `/matriculas/{id}` | `/salas/{id}` | Remove um registro |
 
-## Configuração do ambiente (.env)
-
-A aplicação lê o usuário e a senha do MySQL das variáveis `DB_USER` e `DB_PASSWORD`, definidas em `src/main/resources/application.properties`. Nenhuma credencial fica no repositório.
-
-### 1. Crie o arquivo `.env`
-
-Copie o `.env.example` da raiz do projeto para um arquivo chamado `.env` e preencha com as suas credenciais:
-
-```properties
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-```
-
-### 2. Configure a run configuration no IntelliJ
-
-1. Abra a classe `EscolaApiApplication`.
-2. Clique nos **três pontos** ao lado do botão de executar e escolha **Edit**.
-3. Na janela de configuração, abra a aba **Environment variables**.
-4. Clique em **+** e selecione **Path** (ou **File**), apontando para o `.env` da raiz do projeto.
-5. Na coluna ao lado, confira se `DB_USER` e `DB_PASSWORD` aparecem listadas com os valores do arquivo.
-6. Aplique (**Apply**) e execute a aplicação.
-
 ## Documentação (Swagger)
 
 Com a aplicação em execução, a documentação interativa da API fica disponível em:
