@@ -19,8 +19,8 @@ public class SalaController {
     private SalaService salaService;
 
     @PostMapping()
-    public ResponseEntity<SalaResponse> cadastrar(@RequestBody @Valid SalaRequest dto) {
-        SalaResponse response = salaService.cadastrarSala(dto);
+    public ResponseEntity<SalaResponse> cadastrar(@RequestBody @Valid SalaRequest request) {
+        SalaResponse response = salaService.cadastrarSala(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -35,8 +35,8 @@ public class SalaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SalaResponse> atualizarSala(@PathVariable Long id, @RequestBody @Valid SalaRequest dto) {
-        return ResponseEntity.ok(salaService.atualizarSala(id, dto));
+    public ResponseEntity<SalaResponse> atualizarSala(@PathVariable Long id, @RequestBody @Valid SalaRequest request) {
+        return ResponseEntity.ok(salaService.atualizarSala(id, request));
     }
 
     @DeleteMapping("/{id}")
